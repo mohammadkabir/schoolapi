@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
@@ -17,12 +18,16 @@ public class SchoolTest {
 	
 	public static void main(String[] args) {
 		FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext(
-				"D:\\Users\\245546\\src\\school-api\\src\\main\\resources\\META-INF\\spring\\root-context.xml");
+				"C:/Users/kabir/workspace/school-api/src/main/resources/META-INF/spring/root-context.xml");
 
 		//ctx.refresh();
 		SchoolTest p = ctx.getBean(SchoolTest.class);
         p.start(args);
+	
+
 	}
+
+	
 
 	
 	@Autowired
@@ -42,55 +47,223 @@ public class SchoolTest {
 		//schools = schoolDao.findAllSchoolWithDetail();//Deleted by kabir add later
 		//listContactsWithDetail(schools);//Deleted by kabir add later
 
-		School school;
+		//School school;
 
 		// Find contact by ID
-		school = schoolDao.findSchoolById(1l);
-		System.out.println("");
-		System.out.println("School with id  1 before new school added:" + school);
-		System.out.println("");
+		//school= schoolDao.findSchoolById(100l);
+		
+		
+		
+		
 
 		// Add new contactkabir
-		School	myschool = new School();
-		myschool.setName("Randal Elementaqry added kabirnew_COMMENTS");
-		myschool.setApiScore(7);
-		myschool.setCity("Fremont");
-		myschool.setState("CA");
-		myschool.setZip("94086");
 		
+		/* Temporarily commented
+		School	myschool = new School();
+		myschool.setName("Mission High Elementary");
+		myschool.setApiScore(950);
+		myschool.setCity("Freemont");
+		myschool.setState("CA");
+		myschool.setZip("95051");
+		//myschool.setId(4);
+		
+		System.out.println("School Without schoold id:" + myschool);
 		
 		DemographicAPI myapi=new DemographicAPI();
+		myapi.setDemographicType("Hispanic");
+		myapi.setApiScore(750);
+		//myapi.setId(5);
+		DemographicAPI my_api1=new DemographicAPI();
+		my_api1.setDemographicType("Asian");
+		my_api1.setApiScore(980);
+		//myapi1.setId(6);
 		
-		myapi.setDemographicType("HispanicNEW");
-		myapi.setApiScore(699);
-		myapi.setDemographicType("Asian");
-		myapi.setApiScore(899);
+		myschool.addApidetail(myapi);
 		
-		myapi.setDemographicType("FilipinoNew");
-		myapi.setApiScore(699);
-		myapi.setDemographicType("African American");
-		myapi.setApiScore(650);
+		myschool.addApidetail(my_api1);
 		
-		myapi.setMyschool(myschool);
-	//==================================================================	
-		//myschool.addApidetail(myapi);
-		
-		
-		//SchoolComment myComment=new SchoolComment(); 
-		
-		//myComment.setComment("Philtrip on Tuesday December 19 2013");
-		//myschool.addComments(myComment);
+		System.out.println("MY SCHOOL After Adding New Dempgraphic Api in the Hash list and Before saving  " + myschool);
 		
 		
-		schoolDao.saveSchool(myschool);
+	*/	
 		
 		
-		// contactDao.save(contact);
 	
 		
-		List <School>	myschools = schoolDao.findAllSchoolWithDetail();
-		listContactsWithDetail(myschools);
+	//List <School> retrieveSchool=schoolDao.findAllSchool();
+		
+		
+		School retrieveSchool=schoolDao.findSchoolById((long) 8);	
+		
+		
+		
+		
+		System.out.println("School Retrieve from DataBase Here:  " + retrieveSchool);
+		
+		retrieveSchool = schoolDao.getSchoolWithCommentsAndDemographicsDetails(7L);
+		System.out.println(retrieveSchool);
+		for (SchoolComment c:retrieveSchool.getMyComments()) {
+			System.out.println(c.toString());
+		}
+		for (DemographicAPI d: retrieveSchool.getDemographicAPIdetails()) {
+			System.out.println(d.toString());
+		}
+	
+		
+		/*
+		
+		Set <DemographicAPI> retrivedDemographicapi=retrieveSchool.getDemographicAPIdetails();
+		
+		
+		DemographicAPI Africanapi=new DemographicAPI();
+		Africanapi.setDemographicType("African American");
+		Africanapi.setApiScore(750);
+		
+		
+		DemographicAPI Asianapi=new DemographicAPI();
+		Asianapi.setDemographicType("Asian");
+		Asianapi.setApiScore(900);
+		
+		retrieveSchool.addApidetail(Africanapi);
+	
+		retrieveSchool.addApidetail(Asianapi);
+		
+		*/
+		
+		/*
+		retrieveSchool.setName("Rose Elementary");
+		
+		Set <DemographicAPI> retrivedDemographicapi=retrieveSchool.getDemographicAPIdetails();
+		
+		DemographicAPI chngedApi=null;
+		
+				for (DemographicAPI eachApi:retrivedDemographicapi )
+						{
+			
+			            if(eachApi.getDemographicType().equalsIgnoreCase("asian"))
+			            		{
+			            	
+			            	System.out.println("Found one school with : " +eachApi.getDemographicType()+"Demographic Type");
+			            	eachApi.setDemographicType("Indian");   
+			            	eachApi.setApiScore(900);
+			            		}
+							
+						}
+		
+		
+		
+		
+		*/
+	/*	
+		
+	// Deleting the Hispanic Api	
+		
+		
+		Set <DemographicAPI> retrivedDemographicapi=retrieveSchool.getDemographicAPIdetails();
+		
+		DemographicAPI deleteApi=null;
+		
+		for (DemographicAPI eachApi:retrivedDemographicapi )
+				{
+	
+	            if(eachApi.getDemographicType().equalsIgnoreCase("Indian"))
+	            		{
+	            	
+	            	
+	            	
+	            	System.out.println("Found one school with : " +eachApi.getDemographicType()+"Demographic Type");
+	            	deleteApi=eachApi;
+	            	
+	            	
+	            	//eachApi.setDemographicType("Indian");   
+	            	//eachApi.setApiScore(900);
+	            		}
+					
+				}
 
+	
+	
+		
+		
+		retrieveSchool.removeApidetail(deleteApi);
+		
+		*/
+		
+		
+	// Adding comments for Testing
+		/*
+		SchoolComment myComments=new SchoolComment();
+		
+		myComments.setComment("2014 Year school will be started on August 18,2014");
+		
+		schoolDao.saveSchool(retrieveSchool);
+
+		*/
+	
+		
+		//List <School>	myschools = schoolDao.findAllSchoolWithDetail();
+		//listSchoolsWithDetail(myschools);
+		
+
+//	=========================================================================	
+		
+	/*	
+		School	myschool = new School();
+		myschool.setName("Harrsion High Elementary");
+		myschool.setApiScore(850);
+		myschool.setCity("Hayward");
+		myschool.setState("CA");
+		myschool.setZip("95051");
+		
+		DemographicAPI Africanapi=new DemographicAPI();
+		Africanapi.setDemographicType("African American");
+		Africanapi.setApiScore(750);	
+		
+		myschool.addApidetail(Africanapi);
+
+		
+		
+SchoolComment myComments=new SchoolComment();
+myComments.setComment("2014 Year school will be started on August 18,2014");
+	
+myschool.addCommentset(myComments);		
+		
+schoolDao.saveSchool(myschool);		
+
+*/
+//===================================================================================		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//	
+		
+		
+		
+		
+/*	
+		
+		
+		School school1 = schoolDao.findSchoolById(2L);
+		DemographicAPI api = new DemographicAPI();
+		api.setApiScore(896);
+		api.setDemographicType("fas");
+		api.setId(10);
+		school1.getDemographicAPIdetails().add(api);
+		schoolDao.saveSchool(school1);
+		System.out.println(school1);
+		
+		
+		/*List <School>	myschools = schoolDao.findAllSchoolWithDetail();
+		listSchoolsWithDetail(myschools);
+*/
 		
 	}
 
@@ -103,7 +276,7 @@ public class SchoolTest {
 		}
 	}
 
-	private static void listContactsWithDetail(List<School> schools) {
+	private static void listSchoolsWithDetail(List<School> schools) {
 		System.out.println("");
 		System.out.println("Listing contacts with details:");
 		for (School school : schools) {

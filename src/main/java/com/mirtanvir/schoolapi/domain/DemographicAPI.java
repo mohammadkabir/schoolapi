@@ -7,37 +7,38 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
+import org.hibernate.annotations.ForeignKey;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 @Table(name="demographics_api")
 public class DemographicAPI {
-	@Override
-	public String toString() {
-		return "DemographicAPI [id=" + id
-				+ ", schoolId=" + schoolId + ", demographicType="
-				+ demographicType + ", apiScore=" + apiScore + "]";
-	}
+
+	private long id;
+	private String demographicType;
+	private double apiScore;
+	private int version;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
 	}
-	public long getSchoolId() {
-		return schoolId;
-	}
-	public void setSchoolId(long schoolId) {
-		this.schoolId = schoolId;
-	}
+	@Column(name="demographic_type")
 	public String getDemographicType() {
 		return demographicType;
 	}
 	public void setDemographicType(String demographicType) {
 		this.demographicType = demographicType;
 	}
+	
+	@Column(name="api_score")
 	public double getApiScore() {
 		return apiScore;
 	}
@@ -45,32 +46,29 @@ public class DemographicAPI {
 		this.apiScore = apiScore;
 	}
 	
-	@ManyToOne
-	@JoinColumn(name = "school_id", insertable = false, updatable = false)
-	private School myschool;
 	
 	
-	public School getMyschool() {
-		return myschool;
-	}
-	public void setMyschool(School myschool) {
-		this.myschool = myschool;
+	@Version
+	@Column(name = "version")
+	public int getVersion() {
+		return this.version;
+
 	}
 
+	public void setVersion(int incomingVersion) {
+		this.version = incomingVersion;
+
+	}
+	
+	
 
 	
+	@Override
+	public String toString() {
+		return "DemographicAPI [ID=" + id
+				 + ", demographicType="
+				+ demographicType + ", apiScore=" + apiScore +",version="+version+  "]";
+	}
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
-	
-	@Column(name="school_id")
-	private long schoolId;
-	
-	@Column(name="demographic_type")
-	private String demographicType;
-	
-	@Column(name="api_score")
-	private double apiScore;
 	
 }

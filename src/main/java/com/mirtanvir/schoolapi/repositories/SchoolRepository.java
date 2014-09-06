@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+
 import com.mirtanvir.schoolapi.domain.School;
 
 //public interface SchoolRepository extends PagingAndSortingRepository<School, Long> {
@@ -32,4 +33,7 @@ public interface SchoolRepository {
 	
 	// Delete a school
 	public void deleteSchool(School school);
+	
+	School getSchoolWithComments(Long schoolId);
+	School getSchoolWithCommentsAndDemographicsDetails(Long id);
 }
