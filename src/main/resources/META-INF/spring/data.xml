@@ -55,7 +55,7 @@
 	
 	
 	
-	<context:component-scan base-package="com.mirtanvir.schoolapi" />
+	<context:component-scan base-package="com.mirtanvir.schoolapi"/>
 
 
 
@@ -64,53 +64,15 @@
        
         <property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="com.mirtanvir.schoolapi.domain"/>
-       	<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" /> 
-		<property name="hibernate.show_sql" value="false" />
-		<property name="hibernate.hbm2ddl.auto" value="create-drop" />
-		<property name="hibernate.hbm2ddl.import_files" value="import.sql" />-->
-       
-       
-       <!--  
-       <property name="jpaVendorAdapter">
-		<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-        
-       <tx:annotation-driven/>
-       
-       class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-       
-       
-       
-       -->
-    
-
+       	
 
 </bean>
 
 
 
 
-<!-- ******************************************************************** -->
-
-	
 
 
-
-	<!-- Creates a EntityManagerFactory for use with the Hibernate JPA provider 
-		and a simple in-memory data source populated with test data -->
-
-	<!--
-	
-	
-
--->
-
-
-
-
-
-
-
-	
 
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"

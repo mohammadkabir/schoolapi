@@ -16,7 +16,7 @@
 
 		<class> com.mirtanvir.schoolapi.domain.School</class>
 		<class> com.mirtanvir.schoolapi.domain.SchoolApidetail</class>
-
+        <class> com.mirtanvir.schoolapi.domain.SchoolComment</class>
 		<properties>
 
 
@@ -32,7 +32,7 @@
 
 
 
-			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 			<property name="hibernate.hbm2ddl.import_files" value="import.sql" />
 
