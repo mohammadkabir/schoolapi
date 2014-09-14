@@ -2,6 +2,7 @@ package com.mirtanvir.schoolapi.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -92,9 +93,32 @@ public void setVersion(int incomingVersion) {
 
 
 
+private Set<Users> myStudentUsers=new HashSet<Users>();
 
 
 
+@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+@ElementCollection(targetClass=Users.class)
+@JoinTable(name = "school_user_detail", 
+      //joinColumns = @JoinColumn(name = "school_id"), 
+     // inverseJoinColumns = @JoinColumn(name = "user_id"))
+
+joinColumns={@JoinColumn(name="school_id", referencedColumnName="school_id")},
+inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")})
+
+
+
+
+public Set<Users> getMyUsers() {
+
+	return this.myStudentUsers;
+}
+
+
+public void setMyUsers(Set<Users> incoming_users) {
+	this.myStudentUsers = incoming_users;
+}
 
 
 @Override

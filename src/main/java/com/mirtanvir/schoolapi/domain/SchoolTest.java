@@ -90,7 +90,7 @@ public class SchoolTest {
 		
 	
 		
-		School retrieveSchool=schoolDao.getSchoolWithCommentsAndDemographicsDetails(8l);
+		List<School> retrieveSchool=schoolDao.findAllSchool();
 /*
 	Students mystudent=new Students();
 	mystudent.setFirstName("Sarina");
@@ -135,6 +135,10 @@ public class SchoolTest {
 		myStudents.setLastName("Kabir");
 		myStudents.setPhone("408-836-2081");
 		myStudents.setEmail("rifat@gmail.com");
+		
+		
+		
+		
 		
 		//myStudents.addUserset(parent1);
 		//DemographicAPI my_api1=new DemographicAPI();

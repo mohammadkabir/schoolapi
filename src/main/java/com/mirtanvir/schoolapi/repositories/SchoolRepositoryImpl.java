@@ -35,12 +35,17 @@ public class SchoolRepositoryImpl implements SchoolRepository {
 		this.sessionFactory = sessionFactory;
 	}
 
+	
+	/*
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<School> findAllSchool() {
 		return sessionFactory.getCurrentSession().createQuery("from School s ")
 				.list();
 	}
+
+*/
+
 
 	@SuppressWarnings("unchecked")
 	public List<School> findAllSchoolWithDetail() {
@@ -102,5 +107,22 @@ public class SchoolRepositoryImpl implements SchoolRepository {
 		sessionFactory.getCurrentSession().delete(school);
 		log.info("Contact deleted with id: " + school.getId());
 	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
+	public List<School> findAllSchool() {
+
+		Session currentSession = null;
+		currentSession = sessionFactory.getCurrentSession();
+
+		//School school = (School) currentSession.get(School.class, schoolId);
+		//Hibernate.initialize(school.getMyComments());
+		
+		return  currentSession.createQuery("select student_id,school_id, user_id,First_Name from student st, school_user_detail sd where st.school_id = sd.school_id").list();
+		
+		//return school;
+	}
+	
+
 
 }

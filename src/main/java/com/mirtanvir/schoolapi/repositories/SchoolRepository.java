@@ -22,6 +22,9 @@ public interface SchoolRepository {
 	// Find all contacts
 	public List<School> findAllSchool();
 	
+	
+	
+	
 	// Find all contacts with telephone and hobbies
 	public List<School> findAllSchoolWithDetail();
 	
