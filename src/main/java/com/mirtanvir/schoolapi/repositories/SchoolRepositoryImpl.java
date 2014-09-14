@@ -28,6 +28,8 @@ public class SchoolRepositoryImpl implements SchoolRepository {
 		return sessionFactory;
 	}
 
+	
+	
 	@Resource(name = "sessionFactory")
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -52,13 +54,13 @@ public class SchoolRepositoryImpl implements SchoolRepository {
 
 	public School findSchoolById(Long Myid) {
 
-//		return (School) sessionFactory.getCurrentSession()
-//				.getNamedQuery("School.findById").setParameter("id", Myid)
-//				.uniqueResult();
+		return (School) sessionFactory.getCurrentSession()
+			.getNamedQuery("School.findById").setParameter("id", Myid)
+			.uniqueResult();
 
 		// return (School)
-		return (School) sessionFactory.getCurrentSession().createQuery("select  s from School s  join s.myComments a where s.id = :id").setParameter("id",
-		 Myid).uniqueResult();
+		//return (School) sessionFactory.getCurrentSession().createQuery("select  s from School s  join s.myComments a where s.id = :id").setParameter("id",
+		// Myid).uniqueResult();
 
 	}
 
@@ -68,6 +70,8 @@ public class SchoolRepositoryImpl implements SchoolRepository {
 		School school = (School) currentSession.get(School.class, schoolId);
 		Hibernate.initialize(school.getMyComments());
 		Hibernate.initialize(school.getDemographicAPIdetails());
+		Hibernate.initialize(school.getMyStudents());
+		Hibernate.initialize(school.getMyUsers());
 		return school;
 	}
 

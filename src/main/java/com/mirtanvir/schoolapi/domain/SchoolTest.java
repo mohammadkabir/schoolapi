@@ -90,14 +90,75 @@ public class SchoolTest {
 		
 	
 		
-	//List <School> retrieveSchool=schoolDao.findAllSchool();
+		School retrieveSchool=schoolDao.getSchoolWithCommentsAndDemographicsDetails(8l);
+/*
+	Students mystudent=new Students();
+	mystudent.setFirstName("Sarina");
+	mystudent.setLastName("kabir");
+	mystudent.setPhone("408-945-2265");
+	mystudent.setEmail("Sarina@yahoo.com");
+	
+	Users Parents1=new Users();
+	Parents1.setName("Naznin Karim");
+	Parents1.setAddress("444 Dempsey Road Milpitas,CA-95035");
+	Parents1.setHomePhone("408-941-9981");
+	Parents1.setMobile("408-83-5541");
+	Parents1.setEmail("Naznin@hotmail.com");
+	Parents1.setRelationship("Mother");
+	retrieveSchool.addStudentset(mystudent);
+	retrieveSchool.addUserset(Parents1);
+	schoolDao.saveSchool(retrieveSchool);
+*/	
+	
+	System.out.println("School Retrieve from DataBase Here@@:  " + retrieveSchool);
+	
+/*		
 		
+		Users parent1=new Users();
+		
+		parent1.setName("Mohammad Kabir");
+		parent1.setAddress("444 Dempsey road,Milpitas,ca-95035");
+		parent1.setHomePhone("408-941-9981");
+		parent1.setMobile("408-836-5541");
+		parent1.setEmail("boby@yahoo.com");
+		parent1.setRelationship("Father");
+		
+		School schoolWithStudents=new School();
+		schoolWithStudents.setName("Saint Joseph High School");
+		schoolWithStudents.setApiScore(900);
+		schoolWithStudents.setCity("Belmont");
+		schoolWithStudents.setState("CA");
+		schoolWithStudents.setZip("93034");
+		
+		Students myStudents=new Students();
+		myStudents.setFirstName("Rifat");
+		myStudents.setLastName("Kabir");
+		myStudents.setPhone("408-836-2081");
+		myStudents.setEmail("rifat@gmail.com");
+		
+		//myStudents.addUserset(parent1);
+		//DemographicAPI my_api1=new DemographicAPI();
+		//my_api1.setDemographicType("Asian");
+		//my_api1.setApiScore(930);
+		
+		schoolWithStudents.addStudentset(myStudents);
+		schoolWithStudents.addUserset(parent1);
+		
+		schoolDao.saveSchool(schoolWithStudents);
+		
+	*/	
+		
+		
+	//	---------------------------------------
+		
+		
+		
+		
+	/*	
 		
 		School retrieveSchool=schoolDao.findSchoolById((long) 8);	
 		
-		
-		
-		
+			
 		System.out.println("School Retrieve from DataBase Here:  " + retrieveSchool);
 		
 		retrieveSchool = schoolDao.getSchoolWithCommentsAndDemographicsDetails(7L);
@@ -109,7 +170,7 @@ public class SchoolTest {
 			System.out.println(d.toString());
 		}
 	
-		
+	*/	
 		/*
 		
 		Set <DemographicAPI> retrivedDemographicapi=retrieveSchool.getDemographicAPIdetails();

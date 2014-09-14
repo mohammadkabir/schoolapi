@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -26,22 +27,21 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity
 @Table(name = "schools")
 // ------------------------------------------------------
-/*@NamedQueries({
+@NamedQueries({
 // @NamedQuery(name = "School.findById", query =
 // "select distinct s from School s left join fetch s.demographicAPIdetails a  where s.id = :id"),
 
-		@NamedQuery(name = "School.findById", query = "select distinct s from School s left join fetch s.demographicAPIdetails a  where s.id = :id"),
+		//@NamedQuery(name = "School.findById", query = "select distinct s from School s left join fetch s.demographicAPIdetails a  where s.id = :id"),
 
 //		 @NamedQuery(name = "School.getComments", query =
 //		"select * from SchoolComment c where c."),
 
-		// @NamedQuery(name = "School.findById", query =
-		// "select distinct s from School s left join fetch s.demographicAPIdetails a left join fetch s.commentSet k  where s.id = :id"),
+		 @NamedQuery(name = "School.findById", query = "select distinct s from School s left join fetch s.demographicAPIdetails a left join fetch s.myComments k  where s.id = :id"),
 
 		@NamedQuery(name = "School.findAllWithDetail", query = "select distinct s from School s left join fetch s.demographicAPIdetails a") 
 		
 	}
-)*/
+)
 // =============================================================================================================================================
 public class School {
 	//
@@ -63,7 +63,10 @@ public class School {
 	public String toString() {
 		return "School [id=" + id + ", school_name=" + school_name + ", state="
 				+ state + ", city=" + city + ", zip=" + zip + ", apiScore="
-				+ apiScore + ", version=" + version + "]";
+				+ apiScore + ", version=" + version
+				+ ", demographicAPIdetails=" + demographicAPIdetails
+				+ ", myComments=" + myComments + ", myStudents=" + myStudents
+				+ ", myUsers=" + myUsers + "]";
 	}
 
 	private String school_name;
@@ -79,14 +82,17 @@ public class School {
 	private String zip;
 
 	private float apiScore;
-
-	private Set<DemographicAPI> demographicAPIdetails = new HashSet<DemographicAPI>();
-
-	// private Set<SchoolComment> commentSet = new HashSet<SchoolComment>();
-
-	private Set<SchoolComment> myComments = new HashSet<SchoolComment>();
-
 	private int version;
+	
+	
+	private Set<DemographicAPI> demographicAPIdetails = new HashSet<DemographicAPI>();
+	private Set<SchoolComment> myComments = new HashSet<SchoolComment>();
+    private Set<Students> myStudents=new HashSet<Students>();
+    private Set<Users> myUsers=new HashSet<Users>();
+	
+	
+	
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -208,6 +214,74 @@ public class School {
 
 	}
 
+	
+	
+	// =====================For Students==================================
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "school_id")
+
+	public Set<Students> getMyStudents() {
+
+		return this.myStudents;
+	}
+
+	public void setMyStudents(Set<Students> incoming_students) {
+		this.myStudents = incoming_students;
+	}
+
+	public void addStudentset(Students incoming_students) {
+
+		// incoming_apidetail.setMyschool(this);
+
+		getMyStudents().add(incoming_students);
+
+	}
+
+	public void removeStudentset(Students incoming_students) {
+
+		getMyStudents().remove(incoming_students);
+
+	}
+
+
+	
+	//==========================================================================
+	
+	
+	//----------------------------------------------
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "school_user_detail", 
+	      joinColumns = @JoinColumn(name = "school_id"), 
+	      inverseJoinColumns = @JoinColumn(name = "user_id"))
+
+	public Set<Users> getMyUsers() {
+
+		return this.myUsers;
+	}
+
+	public void setMyUsers(Set<Users> incoming_users) {
+		this.myUsers = incoming_users;
+	}
+
+	public void addUserset(Users incoming_users) {
+
+		// incoming_apidetail.setMyschool(this);
+
+		getMyUsers().add(incoming_users);
+
+	}
+
+	public void removeUserset(Users incoming_users) {
+
+		getMyUsers().remove(incoming_users);
+
+	}
+
+
+
+	//==========================================================================
+
+	
 	@Version
 	@Column(name = "version")
 	public int getVersion() {
