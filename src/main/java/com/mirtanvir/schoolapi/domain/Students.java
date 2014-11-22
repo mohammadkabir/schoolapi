@@ -91,23 +91,16 @@ public void setVersion(int incomingVersion) {
 }
 
 
-
-
 private Set<Users> myStudentUsers=new HashSet<Users>();
 
 
 
 @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 
-@ElementCollection(targetClass=Users.class)
-@JoinTable(name = "school_user_detail", 
-      //joinColumns = @JoinColumn(name = "school_id"), 
-     // inverseJoinColumns = @JoinColumn(name = "user_id"))
-
-joinColumns={@JoinColumn(name="school_id", referencedColumnName="school_id")},
+@JoinTable(name = "student_user_detail", 
+      
+joinColumns={@JoinColumn(name="student_id", referencedColumnName="id")},
 inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")})
-
-
 
 
 public Set<Users> getMyUsers() {
@@ -121,11 +114,49 @@ public void setMyUsers(Set<Users> incoming_users) {
 }
 
 
+
+//================for subjects========
+
+private Set<Subjects> mySubjects=new HashSet<Subjects>();
+
+@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+@JoinTable(name ="student_subject_detail", 
+      
+joinColumns={@JoinColumn(name="student_id", referencedColumnName="id")},
+inverseJoinColumns={@JoinColumn(name="subject_id", referencedColumnName="id")})
+
+
+public Set<Subjects> getMySubjects() {
+
+	return this.mySubjects;
+}
+
+
+public void setMySubjects(Set<Subjects> incoming_subjects) {
+	this.mySubjects = incoming_subjects;
+}
+
+
+
+
+
+
+
+
+
+
+
+//-------------------------------------------------------------------------------------
+
+
+
 @Override
 public String toString() {
 	return "Students [id=" + id + ", FirstName=" + FirstName + ", LastName="
 			+ LastName + ", Phone=" + Phone + ", Email=" + Email + ", version="
-			+ version + "]";
+			+ version + ", myStudentUsers=" + myStudentUsers + ", mySubjects="
+			+ mySubjects + "]";
 }
 
 

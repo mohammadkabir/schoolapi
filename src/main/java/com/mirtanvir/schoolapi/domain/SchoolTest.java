@@ -1,5 +1,7 @@
 package com.mirtanvir.schoolapi.domain;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -90,27 +92,50 @@ public class SchoolTest {
 		
 	
 		
-		List<School> retrieveSchool=schoolDao.findAllSchool();
-/*
-	Students mystudent=new Students();
-	mystudent.setFirstName("Sarina");
-	mystudent.setLastName("kabir");
-	mystudent.setPhone("408-945-2265");
-	mystudent.setEmail("Sarina@yahoo.com");
+		//School retrieveSchool=schoolDao.find;
+
+	//Students mystudent=new Students();
+	//mystudent.setFirstName("Rumi");
+	//mystudent.setLastName("karim");
+	///mystudent.setPhone("408-945-2265");
+	//mystudent.setEmail("rumi@yahoo.com");
 	
-	Users Parents1=new Users();
-	Parents1.setName("Naznin Karim");
-	Parents1.setAddress("444 Dempsey Road Milpitas,CA-95035");
-	Parents1.setHomePhone("408-941-9981");
-	Parents1.setMobile("408-83-5541");
-	Parents1.setEmail("Naznin@hotmail.com");
-	Parents1.setRelationship("Mother");
-	retrieveSchool.addStudentset(mystudent);
-	retrieveSchool.addUserset(Parents1);
-	schoolDao.saveSchool(retrieveSchool);
-*/	
+	//Users Parents1=new Users();
+	//Parents1.setName("Maleka Karim");
+	//Parents1.setAddress("444 Dempsey Road Milpitas,CA-95035");
+	//Parents1.setHomePhone("408-941-9981");
+	//Parents1.setMobile("408-83-5541");
+	//Parents1.setEmail("maleka@hotmail.com");
+	//Parents1.setRelationship("Mother");
 	
-	System.out.println("School Retrieve from DataBase Here@@:  " + retrieveSchool);
+	//School	myschool = new School();
+	//myschool.setName("Berriyesa High Elementary");
+	//myschool.setApiScore(910);
+	//myschool.setCity("San jose");
+	//myschool.setState("CA");
+	//myschool.setZip("95051");
+	
+	// Set<Users> studentUsers = new HashSet<Users>();
+	 //studentUsers.addAll(Arrays.asList(new Users[] {Parents1}));
+	
+	 //studentUsers.add(Parents1);
+	 
+	//mystudent.setMyUsers(studentUsers);
+	
+	//myschool.addStudentset(mystudent);
+	//myschool.addUserset(Parents1);
+	//schoolDao.saveSchool(myschool);	
+	
+	//System.out.println("School Retrieve from DataBase Here@@:  " + myschool);
+	
+	
+	//Students student = schoolDao.getStudentById(14L);
+	//Set<Users> myUsers = student.getMyUsers();
+	
+	Students student=schoolDao.findStudentWithUserid(7L);
+	
+  //List<School> student=schoolDao.findAllSchool();
+	System.out.println("Student found by providing userid:"+student);
 	
 /*		
 		

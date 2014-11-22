@@ -7,7 +7,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 
+
+
 import com.mirtanvir.schoolapi.domain.School;
+import com.mirtanvir.schoolapi.domain.Students;
 
 //public interface SchoolRepository extends PagingAndSortingRepository<School, Long> {
 	
@@ -39,4 +42,13 @@ public interface SchoolRepository {
 	
 	School getSchoolWithComments(Long schoolId);
 	School getSchoolWithCommentsAndDemographicsDetails(Long id);
+
+
+
+
+	Students getStudentById(Long id);
+    Students findStudentWithUserid(Long MyUserid);
+	
+	
+	
 }
