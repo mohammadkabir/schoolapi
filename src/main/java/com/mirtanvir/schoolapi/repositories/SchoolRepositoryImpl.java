@@ -33,24 +33,18 @@ public class SchoolRepositoryImpl implements SchoolRepository {
 		return sessionFactory;
 	}
 
-	
-	
 	@Resource(name = "sessionFactory")
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
-	
 	/*
-	@SuppressWarnings("unchecked")
-	@Transactional(readOnly = true)
-	public List<School> findAllSchool() {
-		return sessionFactory.getCurrentSession().createQuery("from School s ")
-				.list();
-	}
-
-*/
-
+	 * @SuppressWarnings("unchecked")
+	 * 
+	 * @Transactional(readOnly = true) public List<School> findAllSchool() {
+	 * return sessionFactory.getCurrentSession().createQuery("from School s ")
+	 * .list(); }
+	 */
 
 	@SuppressWarnings("unchecked")
 	public List<School> findAllSchoolWithDetail() {
@@ -65,11 +59,12 @@ public class SchoolRepositoryImpl implements SchoolRepository {
 	public School findSchoolById(Long Myid) {
 
 		return (School) sessionFactory.getCurrentSession()
-			.getNamedQuery("School.findById").setParameter("id", Myid)
-			.uniqueResult();
+				.getNamedQuery("School.findById").setParameter("id", Myid)
+				.uniqueResult();
 
 		// return (School)
-		//return (School) sessionFactory.getCurrentSession().createQuery("select  s from School s  join s.myComments a where s.id = :id").setParameter("id",
+		// return (School)
+		// sessionFactory.getCurrentSession().createQuery("select  s from School s  join s.myComments a where s.id = :id").setParameter("id",
 		// Myid).uniqueResult();
 
 	}
@@ -94,8 +89,6 @@ public class SchoolRepositoryImpl implements SchoolRepository {
 		Hibernate.initialize(school.getMyComments());
 		return school;
 	}
-	
-	
 
 	public School saveSchool(School school) {
 
@@ -120,87 +113,73 @@ public class SchoolRepositoryImpl implements SchoolRepository {
 		Session currentSession = null;
 		currentSession = sessionFactory.getCurrentSession();
 
-		//School school = (School) currentSession.get(School.class, schoolId);
-		//Hibernate.initialize(school.getMyComments());
-		
-		return  currentSession.createQuery("select student_id,school_id, user_id,First_Name from student st, school_user_detail sd where st.school_id = sd.school_id").list();
-		
-		
-		
-		//return  currentSession.createQuery("select student_id,First_Name from student st Where st.student_id=("+"select sud.student_id from  student_user_detail sud where sud.user_id = :id"+")"+")";
-		
-		
-		//return school;
+		// School school = (School) currentSession.get(School.class, schoolId);
+		// Hibernate.initialize(school.getMyComments());
+
+		return currentSession
+				.createQuery(
+						"select student_id,school_id, user_id,First_Name from student st, school_user_detail sd where st.school_id = sd.school_id")
+				.list();
+
+		// return
+		// currentSession.createQuery("select student_id,First_Name from student st Where st.student_id=("+"select sud.student_id from  student_user_detail sud where sud.user_id = :id"+")"+")";
+
+		// return school;
 	}
-	
+
 	@Override
 	public Students getStudentById(Long id) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Students currStudent = (Students) currentSession.get(Students.class, id);
+		Students currStudent = (Students) currentSession
+				.get(Students.class, id);
 		if (currStudent != null) {
 			Hibernate.initialize(currStudent.getMyUsers());
 		}
 		return currStudent;
 	}
 
-	
-	
-	
-	
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
-	
-	
-	//public List<Students>  findStudentWithUserid(Long MyUserid) {
-	public Students  findStudentWithUserid(Long MyUserid) {
+	// public List<Students> findStudentWithUserid(Long MyUserid) {
+	public Students findStudentWithUserid(Long MyUserid) {
 		Session currentSession = null;
 		currentSession = sessionFactory.getCurrentSession();
 
-		//School school = (School) currentSession.get(School.class, schoolId);
-		//Hibernate.initialize(school.getMyComments());
-		
-		//return  currentSession.createQuery("select student_id,school_id, user_id,First_Name from student st, school_user_detail sd where st.school_id = sd.school_id").list();
-		
-		//System.out.println("Id Came here--->"+MyUserid);
-		
-		/////return  (List<com.mirtanvir.schoolapi.domain.Students>) currentSession.createQuery("select s from Students s left join fetch s.myUsers Where s.id in("+"select sud.id from  Users sud where sud.id = :id)").setParameter("id", MyUserid).list();
-		
-		//return   (com.mirtanvir.schoolapi.domain.Students) currentSession.createSQLQuery("SELECT *  FROM `students` s WHERE s.id = ("+ "SELECT sud.student_id FROM student_user_detail sud WHERE sud.user_id =:idc)").setParameter("id", MyUserid).uniqueResult();
-		
-		//String hql = "select distinct s from Students s " +"join s.myUsers m " +"where m.id in (:MyUserid)";
-		
-		
-		//org.hibernate.Query query =  currentSession.createQuery(hql);
-		//query.setParameter("id", MyUserid);
-		
-		//return    (List<com.mirtanvir.schoolapi.domain.Students>) (object = query.list());	
-				
-				
-				
-		return  (Students) currentSession.createQuery("select distinct s from Students s left join fetch s.myUsers m left join fetch s.mySubjects j   where m.id = :id").setParameter("id", MyUserid).uniqueResult();		
-		
-		
-		
-		//return  (Students) currentSession.createQuery("select distinct new Name(First_Name, Last_Name) from Students s left join fetch s.myUsers m where m.id = :id").setParameter("id", MyUserid).uniqueResult();		
-			
-		
-		
-		
-	
-	
-	
+		// School school = (School) currentSession.get(School.class, schoolId);
+		// Hibernate.initialize(school.getMyComments());
+
+		// return
+		// currentSession.createQuery("select student_id,school_id, user_id,First_Name from student st, school_user_detail sd where st.school_id = sd.school_id").list();
+
+		// System.out.println("Id Came here--->"+MyUserid);
+
+		// ///return (List<com.mirtanvir.schoolapi.domain.Students>)
+		// currentSession.createQuery("select s from Students s left join fetch s.myUsers Where s.id in("+"select sud.id from  Users sud where sud.id = :id)").setParameter("id",
+		// MyUserid).list();
+
+		// return (com.mirtanvir.schoolapi.domain.Students)
+		// currentSession.createSQLQuery("SELECT *  FROM `students` s WHERE s.id = ("+
+		// "SELECT sud.student_id FROM student_user_detail sud WHERE sud.user_id =:idc)").setParameter("id",
+		// MyUserid).uniqueResult();
+
+		// String hql = "select distinct s from Students s "
+		// +"join s.myUsers m " +"where m.id in (:MyUserid)";
+
+		// org.hibernate.Query query = currentSession.createQuery(hql);
+		// query.setParameter("id", MyUserid);
+
+		// return (List<com.mirtanvir.schoolapi.domain.Students>) (object =
+		// query.list());
+
+		return (Students) currentSession
+				.createQuery(
+						"select distinct s from Students s left join fetch s.myUsers m left join fetch s.mySubjects j   where m.id = :id")
+				.setParameter("id", MyUserid).uniqueResult();
+
+		// return (Students)
+		// currentSession.createQuery("select distinct new Name(First_Name, Last_Name) from Students s left join fetch s.myUsers m where m.id = :id").setParameter("id",
+		// MyUserid).uniqueResult();
+
 	}
-	
-	
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

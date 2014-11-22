@@ -386,4 +386,3 @@ schoolDao.saveSchool(myschool);
 	}
 
 }// end of class
-
