@@ -19,8 +19,9 @@ public class SchoolTest {
 
 	
 	public static void main(String[] args) {
+		
 		FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext(
-				"C:/Users/kabir/workspace/school-api/src/main/resources/META-INF/spring/root-context.xml");
+				Configs.ROOT_CONTEXT_PATH);
 
 		//ctx.refresh();
 		SchoolTest p = ctx.getBean(SchoolTest.class);
