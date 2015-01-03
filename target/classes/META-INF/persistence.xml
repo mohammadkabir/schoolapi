@@ -16,7 +16,7 @@
 
 		<class> com.mirtanvir.schoolapi.domain.School</class>
 		<class> com.mirtanvir.schoolapi.domain.SchoolApidetail</class>
-        <class> com.mirtanvir.schoolapi.domain.SchoolComment</class>
+		<class> com.mirtanvir.schoolapi.domain.SchoolComment</class>
 		<properties>
 
 

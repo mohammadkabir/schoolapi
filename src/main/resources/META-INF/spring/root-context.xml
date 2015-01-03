@@ -19,8 +19,7 @@
 
 
 
-	<context:component-scan base-package="com.mirtanvir.schoolapi" />
-
+	<context:component-scan base-package="com.mirtanvir.schoolapi.controller,com.mirtanvir.schoolapi.repositories" />
 
 
 	<context:annotation-config />
@@ -29,7 +28,7 @@
 
 	<import resource="data.xml" />
 
-	<import resource="repositories.xml" />
+<!-- 	<import resource="repositories.xml" /> -->
 
 
 </beans>
