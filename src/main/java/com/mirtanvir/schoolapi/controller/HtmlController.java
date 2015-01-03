@@ -1,9 +1,12 @@
 package com.mirtanvir.schoolapi.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,12 +24,18 @@ public class HtmlController {
 	@Autowired
 	private SchoolRepository repo;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	@ResponseBody
-	
-	
-	private ModelAndView getAllSchools(Pageable page) {
-		return new ModelAndView("WEB-INF/velocity/hello.vm", "schools", repo.findAllSchool());
-	}
+	// @RequestMapping(value = "", method = RequestMethod.GET)
+	// @ResponseBody
+	// private ModelAndView getAllSchools(Pageable page) {
+	//
+	// return new ModelAndView("WEB-INF/velocity/hello.vm", "schools",
+	// repo.findAllSchool());
+	// }
 
+	@RequestMapping(method = RequestMethod.GET)
+	public String list(Model uiModel) {
+		List<School> contacts = repo.findAllSchool();
+		uiModel.addAttribute("contacts", contacts);
+		return "contacts/list";
+	}
 }

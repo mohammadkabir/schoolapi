@@ -13,10 +13,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mirtanvir.schoolapi.domain.*;
 
+@Service("SchoolRepository")
 @Repository("SchoolRepository")
 @Transactional
 public class SchoolRepositoryImpl implements SchoolRepository {
